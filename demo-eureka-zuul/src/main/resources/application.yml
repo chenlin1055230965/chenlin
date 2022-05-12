@@ -1,0 +1,31 @@
+server:
+  port: 7007
+spring:
+  application:
+    name: api-gateway
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server1:7000/eureka/
+  instance:
+    hostname: localhost
+
+feign:
+  circuitbreaker:
+    enabled: true
+zuul:
+  routes:
+    e-p:
+      path: /e-p/**
+      serviceId: eureka-provider1
+    e-c:
+      path: /e-c/**
+      serviceId: eureka-consumer1
+
+yxwfilter:
+  ip:
+    whitelist: 192.168.163.138
+    whitelistenabled: true
+
